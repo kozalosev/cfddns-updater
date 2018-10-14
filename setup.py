@@ -3,7 +3,7 @@ from os.path import join, dirname
 import versioneer
 
 setup(
-    name="cfddns-updater",
+    name="cfdyndns-updater",
     version=versioneer.get_version(),
     cmdclass=versioneer.get_cmdclass(),
     description="A script to keep the values in the Cloudflare DDNS service in sync with your local dynamic IP address.",

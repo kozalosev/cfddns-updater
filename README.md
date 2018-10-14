@@ -1,5 +1,5 @@
-cfddns-updater
-==============
+cfdyndns-updater
+================
 
 [![Build Status](https://travis-ci.org/kozalosev/cfddns-updater.svg?branch=master)](https://travis-ci.org/kozalosev/cfddns-updater)
 
@@ -38,7 +38,7 @@ How to use the script
 2. **Install the package**:
 
     ```bash
-    pip install cfddns-updater
+    pip install cfdyndns-updater
     ```
     
 3. **Run the script!**
