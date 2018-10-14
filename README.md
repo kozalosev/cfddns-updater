@@ -1,6 +1,8 @@
 cfddns-updater
 ==============
 
+[![Build Status](https://travis-ci.org/kozalosev/cfddns-updater.svg?branch=master)](https://travis-ci.org/kozalosev/cfddns-updater)
+
 A script to keep the values in the Cloudflare DDNS service in sync with your local
 dynamic IP address. It starts an infinite loop that periodically performs checks, using
 an external service, whether your IP address has changed or not. If it is so, the script

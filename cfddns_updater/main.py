@@ -80,7 +80,7 @@ def get_global_config_path_if_exists() -> Optional[Path]:
     return None
 
 
-def log_and_exit(exit_code: ExitCodes, message: str) -> NoReturn:
+def log_and_exit(exit_code: ExitCodes, message: str):
     _logger.critical(message)
     sys.exit(exit_code)
 
