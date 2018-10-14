@@ -63,3 +63,11 @@ Exit codes
 | 2         | invalid command line arguments                  |
 | -1        | the configuration file is not found             |
 | -2        | validation of the configuration file was failed |
+
+
+Integration with a system manager
+---------------------------------
+
+See [Wiki pages](https://github.com/kozalosev/cfddns-updater/wiki) for examples of configuration files for various
+system managers. If your favorite one is missing there, write your own configuration file for it and create a pull
+request. Any contributions are welcomed!
