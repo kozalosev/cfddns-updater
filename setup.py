@@ -1,10 +1,11 @@
 from setuptools import setup, find_packages
 from os.path import join, dirname
-from cfddns_updater import __version__
+import versioneer
 
 setup(
     name="cfddns-updater",
-    version=__version__,
+    version=versioneer.get_version(),
+    cmdclass=versioneer.get_cmdclass(),
     description="A script to keep the values in the Cloudflare DDNS service in sync with your local dynamic IP address.",
     long_description=open(join(dirname(__file__), "README.md")).read(),
     long_description_content_type="text/markdown",
