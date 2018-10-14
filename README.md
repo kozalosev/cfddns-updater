@@ -35,14 +35,24 @@ How to use the script
     You may place it into your home directory under the name of `.cloudflare-ddns-config`.
     On Linux, a system-wide configuration file is also supported: `/etc/cloudflare-ddns-config`.
     
-2. **Run the script!**
+2. **Install the package**:
 
     ```bash
-    python3 -m cfddns_updater 
+    pip install cfddns-updater
+    ```
+    
+3. **Run the script!**
+
+    ```bash
+    cfddns_updater
     ```
     
     It's possible to specify the path to any configuration file explicitly as the only
-    positional argument.
+    positional argument:
+    
+    ```bash
+    cfddns_updater config.yml
+    ```
     
 
 Exit codes
