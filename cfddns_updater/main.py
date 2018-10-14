@@ -26,7 +26,7 @@ from pathlib import Path
 from enum import IntEnum
 from typing import *
 
-from cloudflare_ddns import CloudFlare
+from .fixed_cloudflare_ddns import CloudFlare    # TODO: revert back when the issues will be fixed in the upstream
 from . import config, __version__
 
 
