@@ -41,6 +41,7 @@ def test__load_file(tmpdir):
     expected = {
         'email': 'username@example.org',
         'api_key': 'qP5EZa648oCRm6qlIDmbIOy37RbmLVRX7jpso',
+        'periodicity': 60,
         'domains': [
             {'domain': 'example.org', 'proxied': True},
             {'domain': 'www.example.org', 'proxied': True},
@@ -61,6 +62,31 @@ domains:
     p.write("""email: username@example.org
 api_key: qP5EZa648oCRm6qlIDmbIOy37RbmLVRX7jpso
 domains: [example.org, www.example.org, {domain: ssh.example.org, proxied: false}]
+""")
+    assert load_file(p) == expected
+
+
+def test__load_file__with_periodicity(tmpdir):
+    p = tmpdir.join("test.yml")
+    expected = {
+        'email': 'username@example.org',
+        'api_key': 'qP5EZa648oCRm6qlIDmbIOy37RbmLVRX7jpso',
+        'periodicity': 120,
+        'domains': [
+            {'domain': 'example.org', 'proxied': True},
+            {'domain': 'www.example.org', 'proxied': True},
+            {'domain': 'ssh.example.org', 'proxied': False}
+        ]
+    }
+
+    p.write("""email: username@example.org
+api_key: qP5EZa648oCRm6qlIDmbIOy37RbmLVRX7jpso
+periodicity: 120
+domains:
+  - example.org
+  - www.example.org
+  - domain: ssh.example.org
+    proxied: false
 """)
     assert load_file(p) == expected
 
@@ -102,7 +128,7 @@ def test__load_file__list_as_root(tmpdir):
 
 def test__load(tmpdir):
     p = tmpdir.join("test.yml")
-    expected = Config("username@example.org", "qP5EZa648oCRm6qlIDmbIOy37RbmLVRX7jpso", [
+    expected = Config("username@example.org", "qP5EZa648oCRm6qlIDmbIOy37RbmLVRX7jpso", 60, [
         DomainEntry("example.org", True),
         DomainEntry("www.example.org", True),
         DomainEntry("ssh.example.org", False)
@@ -121,5 +147,25 @@ domains:
     p.write("""email: username@example.org
 api_key: qP5EZa648oCRm6qlIDmbIOy37RbmLVRX7jpso
 domains: [example.org, www.example.org, {domain: ssh.example.org, proxied: false}]
+""")
+    assert load(p) == expected
+
+
+def test__load__with_periodicity(tmpdir):
+    p = tmpdir.join("test.yml")
+    expected = Config("username@example.org", "qP5EZa648oCRm6qlIDmbIOy37RbmLVRX7jpso", 120, [
+        DomainEntry("example.org", True),
+        DomainEntry("www.example.org", True),
+        DomainEntry("ssh.example.org", False)
+    ])
+
+    p.write("""email: username@example.org
+api_key: qP5EZa648oCRm6qlIDmbIOy37RbmLVRX7jpso
+periodicity: 120
+domains:
+  - example.org
+  - www.example.org
+  - domain: ssh.example.org
+    proxied: false
 """)
     assert load(p) == expected

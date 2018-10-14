@@ -7,6 +7,7 @@ containing instances of the DomainEntry class.
 The format of configuration files:
     email: <your login to Cloudflare>
     api_key: <Cloudflare API key>
+    periodicity: <timeout between checks in seconds>
     domains:
       - <domain record 1>    # 'proxied: true' is implied
       - <domain record 2>
@@ -23,6 +24,9 @@ from typing import *
 __all__ = ['load', 'Config', 'DomainEntry']
 _logger = logging.getLogger(__name__)
 
+#: the default timeout between checks in seconds
+DEFAULT_PERIODICITY = 60
+
 
 class DomainEntry(NamedTuple):
     domain: str
@@ -32,6 +36,7 @@ class DomainEntry(NamedTuple):
 class Config(NamedTuple):
     email: str
     api_key: str
+    periodicity: float
     domains: Iterable[DomainEntry]
 
 
@@ -39,7 +44,7 @@ def load(file_path: Union[PurePath, str]) -> Config:
     """Return a Config object by parsing and validating data from some YAML file."""
     config_dict = load_file(file_path)
     domains = [DomainEntry(entry['domain'], entry['proxied']) for entry in config_dict['domains']]
-    return Config(config_dict['email'], config_dict['api_key'], domains)
+    return Config(config_dict['email'], config_dict['api_key'], config_dict['periodicity'], domains)
 
 
 def load_file(file_path: Union[PurePath, str]) -> dict:
@@ -57,6 +62,8 @@ def load_file(file_path: Union[PurePath, str]) -> dict:
     if "domains" not in config_dict or not isinstance(config_dict['domains'], list):
         raise ValueError("Domain entries must be specified as a list under the 'domains' key.")
 
+    if 'periodicity' not in config_dict:
+        config_dict['periodicity'] = DEFAULT_PERIODICITY
     config_dict['domains'] = normalize_domains(config_dict['domains'])
     return config_dict
 

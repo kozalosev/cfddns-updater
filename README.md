@@ -23,6 +23,7 @@ How to use the script
     ```yaml
     email: <your login to Cloudflare>
     api_key: <Cloudflare API key>
+    periodicity: <timeout between checks in seconds>
     domains:
       - example.org    # 'proxied: true' is implied
       - www.example.org

@@ -11,6 +11,7 @@ If none of them exists, the process exits with code -1.
 Exemplary content of the configuration file:
     email: username@example.org
     api_key: qP5EZa648oCRm6qlIDmbIOy37RbmLVRX7jpso
+    periodicity: 60    # in seconds
     domains:
       - example.org    # 'proxied: true' is implied
       - www.example.org
@@ -62,7 +63,7 @@ def main():
     instances = [CloudFlare(conf.email, conf.api_key, entry.domain, entry.proxied) for entry in conf.domains]
     while True:
         sync_domains(instances)
-        sleep(60)
+        sleep(conf.periodicity)
 
 
 def get_global_config_path_if_exists() -> Optional[Path]:
