@@ -2,4 +2,15 @@ language: python
 cache: pip
 python: "3.6"
 install: pip install -r requirements.txt
-script: python -m pytest
+script:
+  - python setup.py test
+  - python setup.py install
+  - cfddns_updater --version
+deploy:
+  provider: pypi
+  user: kozalo
+  password:
+    secure: Nb3l5iXNsVp9z3Iwwb9grVhQ3m4IdAjoQfMqrSVL9B/d0ZM6sWk/7HJRDnY8hMItc15AfqPXhOlcvvse5Z/Ddaa9Yq0yC4Q+3nfzlQZCQhssfaq/sphnxvLW/JwIWv9IgjaHpsSreLs9EvFQyYMPNCRab6evno34BaBhvb3cqhp56sIsQ3KBqA4Giz6p8QisisuFMvx3J1UbDIlWZ6OF1AUDGnbUMiCnMhk+jSv7zefCjTZKZAfPh+tWDv+03Y7tu5Kxd7ZsacCbv9sX50tRulLqJE+I4OnqvqRYhIgLse6dJkX57j7fZGEWWVs6+gScD8qtNwp1AOAyT48ceEMT8MGsSOvX+dZSCUKjjMIUi6E1uKan81edgnG7xmN4Vq0AjmN3SCTV5cPzrZ9AMbWRK0vpKIxgBX2otnrI2K7vvWPjKeeUHwBUF4nW/QTYBVbNQIKnP26kM+ooLc4lMkUYLoNmAKMG4MKSKeq2c8dWWRKoYQqnV66w3RoQuQ1G78JCYNxmLr9g88tfFXvgjJywuitAoWG+Xs7UEhRsbV9sX2ASAleWxnptWWjorXTW03CxAjWQ1Bta9p0HAMrE6AcxU+zwjfd4ZNdc1+d0lKJRtrP+NE8FQqG+S4o0UZPA1iHbaDl7qhHPgqk4oVKatQJ0uPGjIAo/sIW70xsRJC2BosA=
+  on:
+    tags: true
+  distributions: "sdist bdist_wheel"
