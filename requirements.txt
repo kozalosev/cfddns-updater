@@ -2,5 +2,5 @@ cloudflare-ddns==1.2.0
 PyYAML==3.13
 pytest==3.8.2
 pytest-mock==1.10.0
-setuptools==40.1.0
+setuptools==65.5.1
 wheel==0.31.1
